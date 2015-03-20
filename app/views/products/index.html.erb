@@ -1,9 +1,9 @@
-<h2>Hello World</h2>
-<% product = Product.where('price > 1').first %>
-<p>
-	Product Name: <%= product.name %> costs $<%= product.price %>
-</p>
-<p>
-	The seller of this product is named <%= product.user.name %>
-</p>
-<span>Total products = <%= Product.count %>
+<% lots_of_products = Product.includes(:user).all %>
+<ul>
+	<% lots_of_products.each do |product| %>
+		<li>
+			Product Name: <%= product.name %> costs $<%= product.price %>
+			Sold By <%= product.user.name %>
+		</li>
+	<% end %>
+</ul>
